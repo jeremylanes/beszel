@@ -7,39 +7,72 @@ This stack deploys **Beszel** (a lightweight monitoring hub) and its **Agent**, 
 Before running this stack, make sure you have:
 
 - **Docker Compose** installed on your machine.
-- The **Traefik** proxy deployed and actively running on the `traefik_proxy` network. 
-  Required repository link: [https://github.com/jeremylanes/traefik](https://github.com/jeremylanes/traefik)
+- The **Traefik** proxy deployed and actively running on the `traefik_proxy` network.  
+  Required repository: [https://github.com/jeremylanes/traefik](https://github.com/jeremylanes/traefik)
 
 ## ⚙️ Configuration
 
-Define the domain name via an environment variable. 
-Simply create an `.env` file at the root of this folder and add the following variable:
+Create an `.env` file at the root of this folder with the following variables:
 
 ```env
-DOMAIN_NAME=beszel.local
+# Required for the main stack (docker-compose.yml)
+DOMAIN_NAME=beszel.example.com
+
+# Required for the system agent stack (systems/docker-compose.yml)
+LOCAL_AGENT_NAME=my-server        # Unique name to identify this agent
+LOCAL_AGENT_KEY=<agent-key>       # Key provided by the Beszel hub
+LOCAL_AGENT_TOKEN=<agent-token>   # Token provided by the Beszel hub
 ```
+
+> `DOMAIN_NAME` is used by both stacks.  
+> `LOCAL_AGENT_NAME`, `LOCAL_AGENT_KEY`, and `LOCAL_AGENT_TOKEN` are only required when running the system agent (`systems/docker-compose.yml`).
 
 ## 🚀 Quick Start
 
-Managing your containers is simplified using the wrapper scripts provided in the `bin/` directory.
+All container management is done via scripts in the `bin/` directory.
 
-- **To start everything** (Main server + System agents):
-  ```bash
-  bin/up
-  ```
+### Main stack + System agent
 
-- **To view the main logs** (continuous log stream):
-  ```bash
-  bin/logs
-  ```
-  *(You can also watch a specific container, e.g.: `bin/logs beszel`)*
+```bash
+# Start everything (system agent in background, main services in foreground)
+bin/up
 
-- **To stop everything cleanly**:
-  ```bash
-  bin/down
-  ```
+# Stop everything
+bin/down
+
+# Follow all logs (main stack)
+bin/logs
+
+# Follow logs for a specific service (main stack)
+bin/logs beszel
+```
+
+### System agent only
+
+```bash
+# Start only the system agent
+bin/up system
+
+# Stop only the system agent
+bin/down system
+
+# Follow all logs (system agent stack)
+bin/logs system
+
+# Follow logs for a specific service (system agent stack)
+bin/logs system beszel-agent
+```
 
 ## 🏗 Directory Structure
-- `docker-compose.yml`: Launches the main Beszel web service protected by Traefik.
-- `systems/docker-compose.yml`: Contains the monitoring Agent that collects technical system data.
-- `bin/`: Automated management scripts (`up`, `down`, `logs`).
+
+```
+.
+├── .env                        # Environment variables (not committed)
+├── docker-compose.yml          # Main stack: Beszel hub behind Traefik
+├── systems/
+│   └── docker-compose.yml      # System agent stack (local monitoring agent)
+└── bin/
+    ├── up                      # Start services (all or system only)
+    ├── down                    # Stop services (all or system only)
+    └── logs                    # Follow logs (all, specific service, or system)
+```
