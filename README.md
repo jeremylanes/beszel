@@ -6,21 +6,24 @@ This stack deploys **Beszel** (a lightweight monitoring hub) and its **Agent**, 
 
 ### Home — Systems list
 
-| Light | Dark |
-|:---:|:---:|
-| ![Home light mode](screenshots/a1.png) | ![Home dark mode](screenshots/a2.png) |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="screenshots/a2.png">
+  <img alt="Home — systems list" src="screenshots/a1.png">
+</picture>
 
 ### System dashboard
 
-| Light | Dark |
-|:---:|:---:|
-| ![System dashboard light mode](screenshots/b1.png) | ![System dashboard dark mode](screenshots/b2.png) |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="screenshots/b2.png">
+  <img alt="System dashboard" src="screenshots/b1.png">
+</picture>
 
 ### CPU detail
 
-| Light | Dark |
-|:---:|:---:|
-| ![CPU detail light mode](screenshots/c1.png) | ![CPU detail dark mode](screenshots/c2.png) |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="screenshots/c2.png">
+  <img alt="CPU detail" src="screenshots/c1.png">
+</picture>
 
 ---
 
