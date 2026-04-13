@@ -13,4 +13,4 @@ services:
       LISTEN: 45876
       KEY: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRt9nVKUQ3wpZCyeNSwDJRAQCvc1fFG7UcCNxAut3BB'
       TOKEN: 2800e8f7-06ea-4ccc-b737-e85a531b2b3f
-      HUB_URL: http://localhost:8090
+      HUB_URL: https://${DOMAIN_NAME}

@@ -5,9 +5,9 @@ cd "$(dirname "$0")/.."
 
 # Stop main services
 echo "Stopping main services (docker-compose.yml)..."
-docker compose -f docker-compose.yml down
+docker compose -f docker-compose.yml --env-file ./.env down
 
 # Stop systems services
 echo "Stopping systems services (systems/docker-compose.yml)..."
-docker compose -f systems/docker-compose.yml down
+docker compose -f systems/docker-compose.yml --env-file ./.env down
 

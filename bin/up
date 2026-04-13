@@ -8,8 +8,8 @@ cd "$(dirname "$0")/.."
 
 # Run systems services in background
 echo "Starting systems services (systems/docker-compose.yml)..."
-docker compose -f systems/docker-compose.yml up -d --build
+docker compose -f systems/docker-compose.yml --env-file ./.env up -d --build
 
 # Run main services
 echo "Starting main services (docker-compose.yml)..."
-docker compose -f docker-compose.yml up --build
+docker compose -f docker-compose.yml --env-file ./.env up --build

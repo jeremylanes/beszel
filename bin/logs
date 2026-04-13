@@ -6,8 +6,8 @@ cd "$(dirname "$0")/.."
 # verify if we have a parameter
 if [ -n "$1" ]; then
   echo "Logs for $1 service..."
-  docker compose -f docker-compose.yml logs -f "$1"
+  docker compose -f docker-compose.yml --env-file ./.env logs -f "$1"
 else
   echo "Logs for all services..."
-  docker compose -f docker-compose.yml logs -f
+  docker compose -f docker-compose.yml --env-file ./.env logs -f
 fi
