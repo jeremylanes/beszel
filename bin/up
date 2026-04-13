@@ -6,5 +6,10 @@ cd "$(dirname "$0")/.."
 # Build with update
 # docker compose -f docker-compose.yml build --no-cache
 
-# Run services
+# Run systems services in background
+echo "Starting systems services (systems/docker-compose.yml)..."
+docker compose -f systems/docker-compose.yml up -d --build
+
+# Run main services
+echo "Starting main services (docker-compose.yml)..."
 docker compose -f docker-compose.yml up --build

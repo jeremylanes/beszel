@@ -10,3 +10,4 @@ if [ -n "$1" ]; then
 else
   echo "Logs for all services..."
   docker compose -f docker-compose.yml logs -f
+fi

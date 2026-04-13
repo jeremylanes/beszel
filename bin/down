@@ -3,6 +3,11 @@
 # Go to the project root
 cd "$(dirname "$0")/.."
 
-# Run services
+# Stop main services
+echo "Stopping main services (docker-compose.yml)..."
 docker compose -f docker-compose.yml down
+
+# Stop systems services
+echo "Stopping systems services (systems/docker-compose.yml)..."
+docker compose -f systems/docker-compose.yml down
 
