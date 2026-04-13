@@ -1,7 +1,7 @@
 services:
   beszel-agent:
     image: henrygd/beszel-agent
-    container_name: beszel-agent1
+    container_name: beszel-agent-${LOCAL_AGENT_NAME}
     restart: unless-stopped
     network_mode: host
     volumes:
@@ -11,6 +11,6 @@ services:
       # - /mnt/disk/.beszel:/extra-filesystems/sda1:ro
     environment:
       LISTEN: 45876
-      KEY: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRt9nVKUQ3wpZCyeNSwDJRAQCvc1fFG7UcCNxAut3BB'
-      TOKEN: 2800e8f7-06ea-4ccc-b737-e85a531b2b3f
+      KEY: ${LOCAL_AGENT_KEY}
+      TOKEN: ${LOCAL_AGENT_TOKEN}
       HUB_URL: https://${DOMAIN_NAME}
