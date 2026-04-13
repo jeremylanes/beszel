@@ -10,7 +10,7 @@ cd "$(dirname "$0")/.."
 if [ "$1" = "system" ]; then
   # Run systems services only
   echo "Starting systems services (systems/docker-compose.yml)..."
-  docker compose -f systems/docker-compose.yml --env-file ./.env up -d --build
+  docker compose -f systems/docker-compose.yml --env-file ./.env up --build
 else
   # Run systems services in background, then main services in foreground
   echo "Starting systems services (systems/docker-compose.yml)..."
