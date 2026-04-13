@@ -2,6 +2,28 @@
 
 This stack deploys **Beszel** (a lightweight monitoring hub) and its **Agent**, both running via **Docker Compose** and managed behind a **Traefik** reverse proxy.
 
+## 📸 Screenshots
+
+### Home — Systems list
+
+| Light | Dark |
+|:---:|:---:|
+| ![Home light mode](screenshots/a1.png) | ![Home dark mode](screenshots/a2.png) |
+
+### System dashboard
+
+| Light | Dark |
+|:---:|:---:|
+| ![System dashboard light mode](screenshots/b1.png) | ![System dashboard dark mode](screenshots/b2.png) |
+
+### CPU detail
+
+| Light | Dark |
+|:---:|:---:|
+| ![CPU detail light mode](screenshots/c1.png) | ![CPU detail dark mode](screenshots/c2.png) |
+
+---
+
 ## 🛠 Prerequisites
 
 Before running this stack, make sure you have:
@@ -71,6 +93,7 @@ bin/logs system beszel-agent
 ├── docker-compose.yml          # Main stack: Beszel hub behind Traefik
 ├── systems/
 │   └── docker-compose.yml      # System agent stack (local monitoring agent)
+├── screenshots/                # UI screenshots (light & dark mode)
 └── bin/
     ├── up                      # Start services (all or system only)
     ├── down                    # Stop services (all or system only)
