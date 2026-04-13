@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Go to the project root
+cd "$(dirname "$0")/.."
+
+# Build with update
+# docker compose -f docker-compose.yml build --no-cache
+
+# Run services
+docker compose -f docker-compose.yml up --build
