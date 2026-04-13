@@ -2,3 +2,4 @@ beszel_data/
 beszel_socket/
 beszel_agent_data/
 .env
+.idea/

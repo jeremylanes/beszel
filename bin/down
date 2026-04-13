@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
+#
+# Usage:
+#   bin/down            — stop main services then systems services
+#   bin/down system     — stop systems services only
 
 # Go to the project root
 cd "$(dirname "$0")/.."
 
-# Stop main services
-echo "Stopping main services (docker-compose.yml)..."
-docker compose -f docker-compose.yml --env-file ./.env down
+if [ "$1" = "system" ]; then
+  # Stop systems services only
+  echo "Stopping systems services (systems/docker-compose.yml)..."
+  docker compose -f systems/docker-compose.yml --env-file ./.env down
+else
+  # Stop main services first, then systems services
+  echo "Stopping main services (docker-compose.yml)..."
+  docker compose -f docker-compose.yml --env-file ./.env down
 
-# Stop systems services
-echo "Stopping systems services (systems/docker-compose.yml)..."
-docker compose -f systems/docker-compose.yml --env-file ./.env down
-
+  echo "Stopping systems services (systems/docker-compose.yml)..."
+  docker compose -f systems/docker-compose.yml --env-file ./.env down
+fi

@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
+#
+# Usage:
+#   bin/up            — start systems services (background) then main services (foreground)
+#   bin/up system     — start systems services only (background)
 
 # Go to the project root
 cd "$(dirname "$0")/.."
 
-# Build with update
-# docker compose -f docker-compose.yml build --no-cache
+if [ "$1" = "system" ]; then
+  # Run systems services only
+  echo "Starting systems services (systems/docker-compose.yml)..."
+  docker compose -f systems/docker-compose.yml --env-file ./.env up -d --build
+else
+  # Run systems services in background, then main services in foreground
+  echo "Starting systems services (systems/docker-compose.yml)..."
+  docker compose -f systems/docker-compose.yml --env-file ./.env up -d --build
 
-# Run systems services in background
-echo "Starting systems services (systems/docker-compose.yml)..."
-docker compose -f systems/docker-compose.yml --env-file ./.env up -d --build
-
-# Run main services
-echo "Starting main services (docker-compose.yml)..."
-docker compose -f docker-compose.yml --env-file ./.env up --build
+  echo "Starting main services (docker-compose.yml)..."
+  docker compose -f docker-compose.yml --env-file ./.env up --build
+fi

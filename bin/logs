@@ -1,13 +1,30 @@
 #!/usr/bin/env bash
+#
+# Usage:
+#   bin/logs                    — follow logs for all main services
+#   bin/logs <service>          — follow logs for a specific main service
+#   bin/logs system             — follow logs for all systems services
+#   bin/logs system <service>   — follow logs for a specific systems service
 
 # Go to the project root
 cd "$(dirname "$0")/.."
 
-# verify if we have a parameter
-if [ -n "$1" ]; then
-  echo "Logs for $1 service..."
-  docker compose -f docker-compose.yml --env-file ./.env logs -f "$1"
+if [ "$1" = "system" ]; then
+  # Systems stack
+  if [ -n "$2" ]; then
+    echo "Logs for systems/$2 service..."
+    docker compose -f systems/docker-compose.yml --env-file ./.env logs -f "$2"
+  else
+    echo "Logs for all systems services..."
+    docker compose -f systems/docker-compose.yml --env-file ./.env logs -f
+  fi
 else
-  echo "Logs for all services..."
-  docker compose -f docker-compose.yml --env-file ./.env logs -f
+  # Main stack
+  if [ -n "$1" ]; then
+    echo "Logs for $1 service..."
+    docker compose -f docker-compose.yml --env-file ./.env logs -f "$1"
+  else
+    echo "Logs for all services..."
+    docker compose -f docker-compose.yml --env-file ./.env logs -f
+  fi
 fi
